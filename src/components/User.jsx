@@ -1,24 +1,36 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/useAuthContext";
 import styles from "./User.module.css";
+import { useCityContext } from "../contexts/CitiesContext";
 
-const FAKE_USER = {
-  name: "Jack",
-  email: "jack@example.com",
-  password: "qwerty",
-  avatar: "https://i.pravatar.cc/100?u=zz",
-};
+// const FAKE_USER = {
+//   name: "Jack",
+//   email: "jack@example.com",
+//   password: "qwerty",
+//   avatar: "https://i.pravatar.cc/100?u=zz",
+// };
 
 function User() {
-  const user = FAKE_USER;
+	const { details: user, logout } = useAuth();
+	const navigate = useNavigate();
+	const { resetCurrentCity } = useCityContext();
 
-  function handleClick() {}
+	// const user = FAKE_USER;
 
-  return (
-    <div className={styles.user}>
-      <img src={user.avatar} alt={user.name} />
-      <span>Welcome, {user.name}</span>
-      <button onClick={handleClick}>Logout</button>
-    </div>
-  );
+	function handleClick() {
+		logout();
+		navigate("/");
+
+		resetCurrentCity();
+	}
+
+	return (
+		<div className={styles.user}>
+			<img src={user?.avatar} alt={user?.name} />
+			<span>Welcome, {user?.name}</span>
+			<button onClick={handleClick}>Logout</button>
+		</div>
+	);
 }
 
 export default User;

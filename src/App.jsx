@@ -1,66 +1,66 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import Product from "./pages/Product";
-import Form from "./components/Form";
-import Pricing from "./pages/Pricing";
-import HomePage from "./pages/HomePage";
-import PageNotFound from "./pages/PageNotFound";
-import AppLayout from "./pages/AppLayout";
-import Login from "./pages/Login";
+import { lazy, Suspense } from "react";
+// import Product from "./pages/Product";
+// import Pricing from "./pages/Pricing";
+// import HomePage from "./pages/HomePage";
+// import PageNotFound from "./pages/PageNotFound";
+// import AppLayout from "./pages/AppLayout";
+// import Login from "./pages/Login";
+
+// dist/assets/index-d05ae526.css   30.35 kB │ gzip:   5.10 kB
+// dist/assets/index-717dbc68.js   510.42 kB │ gzip: 149.26 kB
+
+const HomePage = lazy(() => import("./pages/Homepage"));
+const Product = lazy(() => import("./pages/Product"));
+const Pricing = lazy(() => import("./pages/Pricing"));
+const Login = lazy(() => import("./pages/Login"));
+const AppLayout = lazy(() => import("./pages/AppLayout"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
+
+// const Pricing = lazy()
+
 import CityList from "./components/CityList";
-import { useEffect, useState } from "react";
+import Form from "./components/Form";
+// import { useEffect, useState } from "react";
+import { CitiesProvider } from "./contexts/CitiesContext";
 import CountryList from "./components/CountryList";
 import City from "./components/City";
+import { AuthProvider } from "./contexts/useAuthContext";
+import ProtectedRoute from "./pages/ProtectedRoute";
+import SpinnerFullPage from "./components/SpinnerFullPage";
 // import PageNav from "./components/PageNav";
 
 function App() {
-	const [cities, setCities] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
-
-	useEffect(() => {
-		async function fetchCountry() {
-			try {
-				setIsLoading(true);
-				const result = await fetch("http://localhost:8000/cities");
-				if (!result.ok)
-					throw new Error("An error occured while fetching data!");
-				const data = await result.json();
-				setIsLoading(false);
-				console.log(cities, isLoading);
-				setCities(data);
-			} catch (err) {
-				alert(err.message);
-			} finally {
-				setIsLoading(false);
-			}
-		}
-		fetchCountry();
-	}, []);
 	return (
 		<>
-			{/* <PageNav /> */}
-
-			<BrowserRouter>
-				<Routes>
-					<Route path="product" element={<Product />} />
-					<Route path="pricing" element={<Pricing />} />
-					<Route path="/" element={<HomePage />} />
-					<Route path="*" element={<PageNotFound />} />
-					<Route path="login" element={<Login />} />
-					<Route path="app" element={<AppLayout />}>
-						<Route index element={<Navigate replace to="cities" />} />
-						<Route
-							path="cities"
-							element={<CityList cities={cities} isLoading={isLoading} />}
-						/>
-						<Route path="cities/:id" element={<City />} />
-						<Route
-							path="countries"
-							element={<CountryList cities={cities} isLoading={isLoading} />}
-						/>
-						<Route path="form" element={<Form />} />
-					</Route>
-				</Routes>
-			</BrowserRouter>
+			<AuthProvider>
+				<CitiesProvider>
+					<BrowserRouter>
+						<Suspense fallback={<SpinnerFullPage />}>
+							<Routes>
+								<Route path="product" element={<Product />} />
+								<Route path="pricing" element={<Pricing />} />
+								<Route path="/" element={<HomePage />} />
+								<Route path="*" element={<PageNotFound />} />
+								<Route path="login" element={<Login />} />
+								<Route
+									path="app"
+									element={
+										<ProtectedRoute>
+											<AppLayout />
+										</ProtectedRoute>
+									}>
+									<Route index element={<Navigate replace to="cities" />} />
+									<Route path="form" element={<Form />} />
+									<Route path="cities" element={<CityList />} />
+									<Route path="cities/:id" element={<City />} />
+									<Route path="countries" element={<CountryList />} />
+								</Route>
+							</Routes>
+						</Suspense>
+					</BrowserRouter>
+				</CitiesProvider>
+			</AuthProvider>
 		</>
 	);
 }
