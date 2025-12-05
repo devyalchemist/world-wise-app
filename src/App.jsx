@@ -46,9 +46,9 @@ function App() {
 								<Route
 									path="app"
 									element={
-										<ProtectedRoute>
-											<AppLayout />
-										</ProtectedRoute>
+										// <ProtectedRoute>
+										<AppLayout />
+										// </ProtectedRoute> */}
 									}>
 									<Route index element={<Navigate replace to="cities" />} />
 									<Route path="form" element={<Form />} />
