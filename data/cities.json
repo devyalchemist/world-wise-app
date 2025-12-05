@@ -1,76 +1,16 @@
 {
-	"cities": [
-		{
-			"cityName": "Lisbon",
-			"country": "Portugal",
-			"emoji": "🇵🇹",
-			"date": "2027-10-31T15:59:59.138Z",
-			"notes": "My favorite city so far!",
-			"position": {
-				"lat": 38.727881642324164,
-				"lng": -9.140900099907554
-			},
-			"id": "73930385"
-		},
-		{
-			"cityName": "Madrid",
-			"country": "Spain",
-			"emoji": "🇪🇸",
-			"date": "2027-07-15T08:22:53.976Z",
-			"notes": "",
-			"position": {
-				"lat": 40.46635901755316,
-				"lng": -3.7133789062500004
-			},
-			"id": "17806751"
-		},
-		{
-			"id": "dfb8",
-			"cityName": "Castello de la Plana",
-			"country": "Spain",
-			"emoji": "🇪🇸",
-			"date": "2025-06-08T03:54:32.596Z",
-			"notes": "Hi castello",
-			"position": {
-				"lat": "40.00856052323235",
-				"lng": "-0.06401912844956394"
-			}
-		},
-		{
-			"id": "9366",
-			"cityName": "Madrid",
-			"country": "Spain",
-			"emoji": "🇪🇸",
-			"date": "2025-09-02T16:17:19.003Z",
-			"notes": "Went to watch ball in this useless city",
-			"position": {
-				"lat": "40.43944097290662",
-				"lng": "-3.6035156250000004"
-			}
-		},
-		{
-			"id": "a34f",
-			"cityName": "Borriol",
-			"country": "Spain",
-			"emoji": "🇪🇸",
-			"date": "2025-09-03T07:47:57.727Z",
-			"notes": "i came here to ball\n",
-			"position": {
-				"lat": "40.03090569089405",
-				"lng": "-0.10917663574218751"
-			}
-		},
-		{
-			"id": "c011",
-			"cityName": "l'Alcora",
-			"country": "Spain",
-			"emoji": "🇪🇸",
-			"date": "2025-09-03T07:48:18.073Z",
-			"notes": "This is my space",
-			"position": {
-				"lat": "40.05140932067553",
-				"lng": "-0.16084671020507815"
-			}
-		}
-	]
+  "cities": [
+    {
+      "id": "c56b5295-e2aa-4c7c-9158-5ee5a08aa6d2",
+      "cityName": "Castello de la Plana",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2025-12-05T10:40:38.678Z",
+      "notes": "first\n",
+      "position": {
+        "lat": "40.017607761436935",
+        "lng": "-0.05699157714843751"
+      }
+    }
+  ]
 }

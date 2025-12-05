@@ -6,6 +6,7 @@ import {
 	useReducer,
 	useState,
 } from "react";
+import { getApiBase } from "../../utils/envApi";
 const initialState = {
 	cities: [],
 	isLoading: false,
@@ -13,7 +14,7 @@ const initialState = {
 	error: "",
 };
 const CityContext = createContext();
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = getApiBase();
 
 function reducer(state, action) {
 	switch (action.type) {
@@ -95,7 +96,7 @@ function CitiesProvider({ children }) {
 		dispatch({ type: "loading" });
 
 		try {
-			await fetch(`${BASE_URL}/cities/${val}`, {
+			await fetch(`${BASE_URL}/cities/${val}`, {	
 				method: "DELETE",
 			});
 			dispatch({ type: "city/deleted", payload: val });
@@ -103,10 +104,7 @@ function CitiesProvider({ children }) {
 			console.error(err.message);
 		}
 	}
-	// function setFormMapPosition(val) {
-	// 	const [lat, lng] = val;
-	// 	setCurrentPosition({ lat, lng });
-	// }
+	
 	async function addCity(val) {
 		dispatch({ type: "loading" });
 

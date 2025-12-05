@@ -1,4 +1,5 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
+import { v4 as uuidv4 } from "uuid";
 
 import { useEffect, useState } from "react";
 import styles from "./Form.module.css";
@@ -64,6 +65,8 @@ function Form() {
 
 		if (!cityName || !date) return;
 		const newCity = {
+			id: uuidv4(),
+
 			cityName,
 			country,
 			emoji,
